@@ -1,0 +1,30 @@
+{
+  "name": "@bzxnetwork/bounty_hunters",
+  "version": "0.1.5",
+  "description": "Scripts to monitor position health and liquidate",
+  "keywords": [],
+  "license": "Apache-2.0",
+  "homepage": "https://github.com/bZxNetwork/bZx-monorepo/tree/master/packages/bounty_hunters#readme",
+  "repository": {
+    "type": "git",
+    "url": "https://github.com/bZxNetwork/bZx-monorepo.git"
+  },
+  "bugs": {
+    "url": "https://github.com/bZxNetwork/bZx-monorepo/issues"
+  },
+  "dependencies": {
+    "@bzxnetwork/bzx.js": "0.5.1",
+    "bignumber.js": "^7.0.1",
+    "forever-monitor": "^1.7.1",
+    "minimist": "^1.2.0",
+    "moment": "^2.22.1",
+    "truffle-hdwallet-provider": "^1.0.12",
+    "truffle-privatekey-provider": "^1.3.0",
+    "web3": "^1.0.0-beta.55",
+    "winston": "^3.0.0"
+  },
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1",
+    "hunt": "node ./hunt.js --network"
+  }
+}

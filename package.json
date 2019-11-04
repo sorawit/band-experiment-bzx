@@ -1,0 +1,19 @@
+{
+  "name": "root",
+  "private": true,
+  "license": "Apache-2.0",
+  "workspaces": [
+    "packages/*"
+  ],
+  "devDependencies": {
+    "lerna": "^3.0.6"
+  },
+  "scripts": {
+    "clean-all": "rm -rf ./node_modules && rm -rf ./packages/**/node_modules",
+    "build-all": "yarn run build-bzx && yarn run build-portal && yarn run build-widget && yarn run build-docs",
+    "build-bzx": "./scripts/build-bzx.sh",
+    "build-docs": "./scripts/build-docs.sh",
+    "build-portal": "./scripts/build-portal.sh",
+    "build-widget": "./scripts/build-widget.sh"
+  }
+}

@@ -1,0 +1,31 @@
+{
+  "name": "@bzxnetwork/starter_project",
+  "version": "0.1.1",
+  "description": "Sample code to quickly get started using the bzx.js library",
+  "keywords": [],
+  "license": "Apache-2.0",
+  "homepage": "https://github.com/bZxNetwork/bZx-monorepo/tree/master/packages/started_project#readme",
+  "repository": {
+    "type": "git",
+    "url": "https://github.com/bZxNetwork/bZx-monorepo.git"
+  },
+  "bugs": {
+    "url": "https://github.com/bZxNetwork/bZx-monorepo/issues"
+  },
+  "dependencies": {
+    "0x.js": "^1.0.8",
+    "bignumber.js": "^7.0.1",
+    "@bzxnetwork/bzx.js": "0.4.6",
+    "cross-env": "^5.2.0",
+    "moment": "^2.22.1",
+    "web3": "1.0.0-beta.36",
+    "ethers": "^3.0.26",
+    "winston": "^3.0.0"
+  },
+  "scripts": {
+    "network": "./scripts/network.sh",
+    "test": "echo \"Error: no test specified\" && exit 1",
+    "scenario:all": "node ./scenarios/es6/all.js",
+    "scenario:zeroExHash": "node ./scenarios/es6/zeroExHashScenario.js"
+  }
+}
