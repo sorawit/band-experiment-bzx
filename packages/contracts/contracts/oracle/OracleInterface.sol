@@ -2,7 +2,11 @@
  * Copyright 2017-2019, bZeroX, LLC. All Rights Reserved.
  * Licensed under the Apache License, Version 2.0.
  */
- 
+<<<<<<< HEAD
+
+=======
+
+>>>>>>> development
 pragma solidity 0.5.3;
 pragma experimental ABIEncoderV2;
 
@@ -102,9 +106,10 @@ contract OracleInterface {
         address lender,
         address interestTokenAddress,
         uint256 amountOwed,
-        uint256 /* gasUsed */)
-        public
-        returns (bool);
+        uint256 gasUsed
+    )
+    public
+    returns (bool);
 
     /// @dev Called by bZx after a borrower has deposited additional collateral
     /// @dev token for an open loan
