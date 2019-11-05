@@ -124,8 +124,10 @@ contract BZxOracle is usingBandProtocol, EIP20Wrapper, EMACollector, GasRefunder
     address public wethContract;
     address public bZRxTokenContract;
     address public oracleNotifier;
+    address public bandOracleContract;
 
     mapping (uint256 => uint256) public collateralInWethAmounts; // mapping of position ids to initial collateralInWethAmounts
+    mapping (address => string) public addressToKey;              // mapping of token address to query key in band
 
     constructor(
         address _vaultContract,
@@ -1216,6 +1218,10 @@ contract BZxOracle is usingBandProtocol, EIP20Wrapper, EMACollector, GasRefunder
         }
     }
 
+    function setTokenAddressToQueryKey(address tokenAddress, string calldata queryKey) external {
+        addressToKey[tokenAddress] = queryKey;
+    }
+
     function _getExpectedRateCall(
         address sourceTokenAddress,
         address destTokenAddress,
@@ -1236,25 +1242,15 @@ contract BZxOracle is usingBandProtocol, EIP20Wrapper, EMACollector, GasRefunder
             );
         }
 
-        (bool result, bytes memory data) = kyberContract.staticcall(
-            abi.encodeWithSignature(
-                "getExpectedRate(address,address,uint256)",
-                sourceTokenAddress,
-                destTokenAddress,
-                requirePermissionedReserveForQuery ? sourceTokenAmount.add(2**255) : sourceTokenAmount
-            )
-        );
+        uint256 srcVal = Oracle(bandOracleContract).querySpotPrice(addressToKey[sourceTokenAddress]);
+        uint256 dstVal = Oracle(bandOracleContract).querySpotPrice(addressToKey[destTokenAddress]);
 
-        assembly {
-            switch result
-            case 0 {
-                expectedRate := 0
-                slippageRate := 0
-            }
-            default {
-                expectedRate := mload(add(data, 32))
-                slippageRate := mload(add(data, 64))
-            }
+        if (srcVal > 0) {
+            expectedRate = dstVal.mul(10**18).div(srcVal);
+            slippageRate = 1;
+        } else {
+            expectedRate = 0;
+            slippageRate = 0;
         }
     }
 
