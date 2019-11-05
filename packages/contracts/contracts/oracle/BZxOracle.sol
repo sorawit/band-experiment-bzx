@@ -20,6 +20,8 @@ import "./OracleNotifier.sol";
 
 import "../shared/WETHInterface.sol";
 
+import "./Band.sol";
+
 
 interface KyberNetworkInterface {
     function kyberNetworkContract()
@@ -52,7 +54,7 @@ interface iMakerDAIPriceFeed {
     function read() external view returns (bytes32);
 }
 
-contract BZxOracle is EIP20Wrapper, EMACollector, GasRefunder, BZxOwnable {
+contract BZxOracle is usingBandProtocol, EIP20Wrapper, EMACollector, GasRefunder, BZxOwnable {
     using SafeMath for uint256;
 
     uint256 internal constant MAX_UINT = 2**256 - 1;
